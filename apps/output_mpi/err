@@ -1,0 +1,95 @@
+*** Error in `./bin/sssp': corrupted size vs. prev_size: 0x0000000001aaa390 ***
+======= Backtrace: =========
+/lib/x86_64-linux-gnu/libc.so.6(+0x777e5)[0x7f578fb037e5]
+/lib/x86_64-linux-gnu/libc.so.6(+0x80dfb)[0x7f578fb0cdfb]
+/lib/x86_64-linux-gnu/libc.so.6(cfree+0x4c)[0x7f578fb1053c]
+/usr/lib/x86_64-linux-gnu/libmpich.so.12(+0xed33f)[0x7f5790ab033f]
+/usr/lib/x86_64-linux-gnu/libmpich.so.12(+0xa9574)[0x7f5790a6c574]
+/usr/lib/x86_64-linux-gnu/libmpich.so.12(PMPI_Finalize+0x304)[0x7f5790a6c944]
+./bin/sssp[0x403535]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf0)[0x7f578faac830]
+./bin/sssp[0x402a49]
+======= Memory map: ========
+00400000-00428000 r-xp 00000000 08:05 6558170                            /home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/bin/sssp
+00627000-00628000 r--p 00027000 08:05 6558170                            /home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/bin/sssp
+00628000-00629000 rw-p 00028000 08:05 6558170                            /home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/bin/sssp
+00629000-00679000 rw-p 00000000 00:00 0 
+01a8a000-01ae5000 rw-p 00000000 00:00 0                                  [heap]
+7f5778000000-7f5778021000 rw-p 00000000 00:00 0 
+7f5778021000-7f577c000000 ---p 00000000 00:00 0 
+7f577c000000-7f577c021000 rw-p 00000000 00:00 0 
+7f577c021000-7f5780000000 ---p 00000000 00:00 0 
+7f5780000000-7f5780021000 rw-p 00000000 00:00 0 
+7f5780021000-7f5784000000 ---p 00000000 00:00 0 
+7f5784000000-7f5784021000 rw-p 00000000 00:00 0 
+7f5784021000-7f5788000000 ---p 00000000 00:00 0 
+7f5788000000-7f5788021000 rw-p 00000000 00:00 0 
+7f5788021000-7f578c000000 ---p 00000000 00:00 0 
+7f578dda2000-7f578dda3000 ---p 00000000 00:00 0 
+7f578dda3000-7f578e1a3000 rw-p 00000000 00:00 0 
+7f578e1a3000-7f578e1a4000 ---p 00000000 00:00 0 
+7f578e1a4000-7f578e5a4000 rw-p 00000000 00:00 0 
+7f578e5a4000-7f578e5a5000 ---p 00000000 00:00 0 
+7f578e5a5000-7f578e9a5000 rw-p 00000000 00:00 0 
+7f578ec46000-7f578ec51000 r-xp 00000000 08:05 1316446                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f578ec51000-7f578ee50000 ---p 0000b000 08:05 1316446                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f578ee50000-7f578ee51000 r--p 0000a000 08:05 1316446                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f578ee51000-7f578ee52000 rw-p 0000b000 08:05 1316446                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f578ee52000-7f578ee58000 rw-p 00000000 00:00 0 
+7f578f259000-7f578f25c000 r-xp 00000000 08:05 1316455                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f578f25c000-7f578f45b000 ---p 00003000 08:05 1316455                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f578f45b000-7f578f45c000 r--p 00002000 08:05 1316455                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f578f45c000-7f578f45d000 rw-p 00003000 08:05 1316455                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f578f45d000-7f578f475000 r-xp 00000000 08:05 1316448                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f578f475000-7f578f674000 ---p 00018000 08:05 1316448                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f578f674000-7f578f675000 r--p 00017000 08:05 1316448                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f578f675000-7f578f676000 rw-p 00018000 08:05 1316448                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f578f676000-7f578f67a000 rw-p 00000000 00:00 0 
+7f578f67a000-7f578f681000 r-xp 00000000 08:05 1316451                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f578f681000-7f578f880000 ---p 00007000 08:05 1316451                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f578f880000-7f578f881000 r--p 00006000 08:05 1316451                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f578f881000-7f578f882000 rw-p 00007000 08:05 1316451                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f578f882000-7f578f88a000 r-xp 00000000 08:05 526558                     /usr/lib/libcr.so.0.5.5
+7f578f88a000-7f578fa89000 ---p 00008000 08:05 526558                     /usr/lib/libcr.so.0.5.5
+7f578fa89000-7f578fa8a000 r--p 00007000 08:05 526558                     /usr/lib/libcr.so.0.5.5
+7f578fa8a000-7f578fa8b000 rw-p 00008000 08:05 526558                     /usr/lib/libcr.so.0.5.5
+7f578fa8b000-7f578fa8c000 rw-p 00000000 00:00 0 
+7f578fa8c000-7f578fc4c000 r-xp 00000000 08:05 1316466                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f578fc4c000-7f578fe4c000 ---p 001c0000 08:05 1316466                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f578fe4c000-7f578fe50000 r--p 001c0000 08:05 1316466                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f578fe50000-7f578fe52000 rw-p 001c4000 08:05 1316466                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f578fe52000-7f578fe56000 rw-p 00000000 00:00 0 
+7f578fe56000-7f578fe6c000 r-xp 00000000 08:05 1315282                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f578fe6c000-7f579006b000 ---p 00016000 08:05 1315282                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f579006b000-7f579006c000 rw-p 00015000 08:05 1315282                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f579006c000-7f579012a000 r-xp 00000000 08:05 527950                     /usr/lib/x86_64-linux-gnu/libomp.so.5
+7f579012a000-7f5790329000 ---p 000be000 08:05 527950                     /usr/lib/x86_64-linux-gnu/libomp.so.5
+7f5790329000-7f579032a000 r--p 000bd000 08:05 527950                     /usr/lib/x86_64-linux-gnu/libomp.so.5
+7f579032a000-7f579032f000 rw-p 000be000 08:05 527950                     /usr/lib/x86_64-linux-gnu/libomp.so.5
+7f579032f000-7f5790338000 rw-p 00000000 00:00 0 
+7f5790338000-7f5790440000 r-xp 00000000 08:05 1316461                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f5790440000-7f579063f000 ---p 00108000 08:05 1316461                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f579063f000-7f5790640000 r--p 00107000 08:05 1316461                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f5790640000-7f5790641000 rw-p 00108000 08:05 1316461                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f5790641000-7f57907b3000 r-xp 00000000 08:05 526466                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f57907b3000-7f57909b3000 ---p 00172000 08:05 526466                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f57909b3000-7f57909bd000 r--p 00172000 08:05 526466                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f57909bd000-7f57909bf000 rw-p 0017c000 08:05 526466                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f57909bf000-7f57909c3000 rw-p 00000000 00:00 0 
+7f57909c3000-7f5790c05000 r-xp 00000000 08:05 526605                     /usr/lib/x86_64-linux-gnu/libmpich.so.12.1.0
+7f5790c05000-7f5790e05000 ---p 00242000 08:05 526605                     /usr/lib/x86_64-linux-gnu/libmpich.so.12.1.0
+7f5790e05000-7f5790e12000 r--p 00242000 08:05 526605                     /usr/lib/x86_64-linux-gnu/libmpich.so.12.1.0
+7f5790e12000-7f5790e14000 rw-p 0024f000 08:05 526605                     /usr/lib/x86_64-linux-gnu/libmpich.so.12.1.0
+7f5790e14000-7f5790e4e000 rw-p 00000000 00:00 0 
+7f5790e4e000-7f5790e74000 r-xp 00000000 08:05 1316424                    /lib/x86_64-linux-gnu/ld-2.23.so
+7f5791047000-7f5791050000 rw-p 00000000 00:00 0 
+7f579105f000-7f5791060000 rw-p 00000000 00:00 0 
+7f5791060000-7f5791061000 ---p 00000000 00:00 0 
+7f5791061000-7f5791073000 rw-p 00000000 00:00 0 
+7f5791073000-7f5791074000 r--p 00025000 08:05 1316424                    /lib/x86_64-linux-gnu/ld-2.23.so
+7f5791074000-7f5791075000 rw-p 00026000 08:05 1316424                    /lib/x86_64-linux-gnu/ld-2.23.so
+7f5791075000-7f5791076000 rw-p 00000000 00:00 0 
+7ffc0f50e000-7ffc0f530000 rw-p 00000000 00:00 0                          [stack]
+7ffc0f5c7000-7ffc0f5c9000 r--p 00000000 00:00 0                          [vvar]
+7ffc0f5c9000-7ffc0f5cb000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]

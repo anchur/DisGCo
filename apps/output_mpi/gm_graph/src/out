@@ -1,0 +1,140 @@
+N = 10000, M = 80000
+graph loading time=27.205000
+reverse edge creation time=0.000000
+before distribute
+after creation of window
+after attaching initial variablesN = 10000, M = 80000
+graph loading time=9.675000
+reverse edge creation time=0.000000
+before distribute
+after creation of window
+after attaching initial variables
+after initializing blocksize
+after variable puts
+N = 10000, M = 80000
+graph loading time=26.897000
+reverse edge creation time=0.001000
+before distribute
+after creation of window
+after attaching initial variables
+after initializing blocksize
+after variable puts
+after gather
+after second set of attachs
+before puts
+after puts
+N = 10000, M = 80000
+graph loading time=11.583000
+reverse edge creation time=0.001000
+before distribute
+after creation of window
+after attaching initial variables
+after initializing blocksize
+after variable puts
+after gather
+after second set of attachs
+before puts
+after puts
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 7453 RUNNING AT lenovo-ThinkPad-X260
+=   EXIT CODE: 134
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Aborted (signal 6)
+This typically refers to a problem with your application.
+Please see the FAQ page for debugging suggestions
+N = 10000, M = 80000
+graph loading time=9.858000
+reverse edge creation time=0.000000
+before distribute
+after creation of window
+after attaching initial variables
+after initializing blocksize
+after variable puts
+after gather
+after second set of attachs
+before puts
+after puts
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 7578 RUNNING AT lenovo-ThinkPad-X260
+=   EXIT CODE: 134
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Aborted (signal 6)
+This typically refers to a problem with your application.
+Please see the FAQ page for debugging suggestions
+N = 10000, M = 80000
+graph loading time=16.834000
+reverse edge creation time=0.001000
+before distribute
+after creation of window
+after attaching initial variables
+after initializing blocksize
+after variable puts
+after gather
+after second set of attachs
+before puts
+after puts
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 7705 RUNNING AT lenovo-ThinkPad-X260
+=   EXIT CODE: 134
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Aborted (signal 6)
+This typically refers to a problem with your application.
+Please see the FAQ page for debugging suggestions
+N = 10000, M = 80000
+graph loading time=10.516000
+reverse edge creation time=0.000000
+before distribute
+after creation of window
+after attaching initial variables
+after initializing blocksize
+after variable puts
+after gather
+after second set of attachs
+before puts
+after puts
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 7837 RUNNING AT lenovo-ThinkPad-X260
+=   EXIT CODE: 134
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Aborted (signal 6)
+This typically refers to a problem with your application.
+Please see the FAQ page for debugging suggestions
+N = 10000, M = 80000
+graph loading time=9.009000
+reverse edge creation time=0.000000
+before distribute
+after creation of window
+after attaching initial variables
+after initializing blocksize
+after variable puts
+after gather
+after second set of attachs
+before puts
+after puts
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 7967 RUNNING AT lenovo-ThinkPad-X260
+=   EXIT CODE: 134
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Aborted (signal 6)
+This typically refers to a problem with your application.
+Please see the FAQ page for debugging suggestions

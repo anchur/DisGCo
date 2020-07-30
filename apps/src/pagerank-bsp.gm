@@ -1,0 +1,27 @@
+Procedure pagerank(G: Graph, e,d: Double, max: Int;
+                   pg_rank: Node_Prop<Double>)
+{
+    Node_Prop<Double> temp_val;
+    Double diff;
+    Int cnt = 0;
+    Double N = G.NumNodes();
+    G.pg_rank = 1 / N;
+    G.temp_val = 0.0;
+
+    Do {
+        diff = 0.0;	
+        Foreach (t: G.Nodes) {
+          Foreach(w:t.Nbrs){
+            w.temp_val += t.pg_rank / t.OutDegree();
+          }
+        }
+
+        Foreach (t: G.Nodes) {
+            Double val = (1-d) / N + d*t.temp_val;
+            diff += | val - t.pg_rank |;
+            t.pg_rank <= val @ t;
+        }
+        cnt++;
+    } While ((diff > e) && (cnt < max));
+}
+

@@ -1,0 +1,27 @@
+
+Procedure cc(G:Graph, dist:N_P<Int>)
+{
+    N_P<Bool> updated;
+    N_P<Bool> updated_nxt;
+    N_P<Int>  dist_nxt;
+    Bool fin = False;
+
+    G.updated = True;
+    G.dist_nxt = G.dist;
+    G.updated_nxt = False;
+
+    While(!fin) {
+        fin = True;
+
+        Foreach(n: G.Nodes)(n.updated) {
+            Foreach(s: n.Nbrs) {
+                <s.dist_nxt; s.updated_nxt> min= <n.dist; True>; 
+            }
+        }
+
+        G.dist = G.dist_nxt;
+        G.updated = G.updated_nxt;
+        G.updated_nxt = False;
+        fin = ! Exist(n: G.Nodes){n.updated};
+    }
+}

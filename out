@@ -1,0 +1,266 @@
+make[1]: Entering directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/src'
+make[1]: Entering directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps'
+make[2]: Entering directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi'
+make[3]: Entering directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/gm_graph/avro-c-1.7.2'
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/errors.c -o src/errors_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/schema_equal.c -o src/schema_equal_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/datum_value.c -o src/datum_value_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+src/datum_value.c: In function ‘avro_datum_value_get_type’:
+src/datum_value.c:86:2: warning: #warning "Bug: EINVAL is not of type avro_type_t." [-Wcpp]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/codec.c -o src/codec_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/value-write.c -o src/value-write_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/value.c -o src/value_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/consumer.c -o src/consumer_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/consume-binary.c -o src/consume-binary_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/string.c -o src/string_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/generic.c -o src/generic_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/resolved-writer.c -o src/resolved-writer_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/resolved-reader.c -o src/resolved-reader_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/value-sizeof.c -o src/value-sizeof_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/schema.c -o src/schema_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+src/schema.c: In function ‘avro_schema_from_json_t’:
+src/schema.c:774:3: warning: #warning "Bug: '0' is not of type avro_type_t." [-Wcpp]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/datafile.c -o src/datafile_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/datum_read.c -o src/datum_read_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/datum_validate.c -o src/datum_validate_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/wrapped-buffer.c -o src/wrapped-buffer_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/allocation.c -o src/allocation_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/value-hash.c -o src/value-hash_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/memoize.c -o src/memoize_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/value-json.c -o src/value-json_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/value-read.c -o src/value-read_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/datum.c -o src/datum_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/dump.c -o src/dump_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/io.c -o src/io_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/datum_write.c -o src/datum_write_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/map.c -o src/map_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/resolver.c -o src/resolver_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/datum_skip.c -o src/datum_skip_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/encoding_binary.c -o src/encoding_binary_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/array.c -o src/array_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c src/st.c -o src/st_avro.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c jansson/src/pack_unpack.c -o jansson/src/pack_unpack_json.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c jansson/src/strbuffer.c -o jansson/src/strbuffer_json.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c jansson/src/error.c -o jansson/src/error_json.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c jansson/src/value.c -o jansson/src/value_json.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c jansson/src/load.c -o jansson/src/load_json.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c jansson/src/dump.c -o jansson/src/dump_json.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c jansson/src/memory.c -o jansson/src/memory_json.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c jansson/src/utf.c -o jansson/src/utf_json.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+gcc -O3 -g -Isrc -Ijansson/src -I../inc -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -c jansson/src/hashtable.c -o jansson/src/hashtable_json.o
+cc1: warning: command line option ‘-std=gnu++11’ is valid for C++/ObjC++ but not for C [enabled by default]
+ar r libgmavro.a  src/errors_avro.o src/schema_equal_avro.o src/datum_value_avro.o src/codec_avro.o src/value-write_avro.o src/value_avro.o src/consumer_avro.o src/consume-binary_avro.o src/string_avro.o src/generic_avro.o src/resolved-writer_avro.o src/resolved-reader_avro.o src/value-sizeof_avro.o src/schema_avro.o src/datafile_avro.o src/datum_read_avro.o src/datum_validate_avro.o src/wrapped-buffer_avro.o src/allocation_avro.o src/value-hash_avro.o src/memoize_avro.o src/value-json_avro.o src/value-read_avro.o src/datum_avro.o src/dump_avro.o src/io_avro.o src/datum_write_avro.o src/map_avro.o src/resolver_avro.o src/datum_skip_avro.o src/encoding_binary_avro.o src/array_avro.o src/st_avro.o jansson/src/pack_unpack_json.o jansson/src/strbuffer_json.o jansson/src/error_json.o jansson/src/value_json.o jansson/src/load_json.o jansson/src/dump_json.o jansson/src/memory_json.o jansson/src/utf_json.o jansson/src/hashtable_json.o  
+make[3]: Leaving directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/gm_graph/avro-c-1.7.2'
+make[3]: Entering directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/gm_graph'
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_graph.cc -o obj/gm_graph.o
+src/gm_graph.cc: In member function ‘void gm_graph::distribute()’:
+src/gm_graph.cc:921:6: warning: unused variable ‘_m’ [-Wunused-variable]
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_rand.cc -o obj/gm_rand.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/graph_gen.cc -o obj/graph_gen.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/graph_gen_main.cc -o obj/graph_gen_main.o
+src/graph_gen_main.cc: In function ‘int main(int, char**)’:
+src/graph_gen_main.cc:31:96: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘int64_t {aka long int}’ [-Wformat]
+src/graph_gen_main.cc:31:96: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘int64_t {aka long int}’ [-Wformat]
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_util.cc -o obj/gm_util.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_lock.cc -o obj/gm_lock.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_file_handling.cc -o obj/gm_file_handling.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_file_c.cc -o obj/gm_file_c.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_read_setup.cc -o obj/gm_read_setup.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_graph_binary_loader.cc -o obj/gm_graph_binary_loader.o
+src/gm_graph_binary_loader.cc: In function ‘bool load_binary_property(FILE*, VALUE_TYPE, size_t, void*&)’:
+src/gm_graph_binary_loader.cc:292:14: warning: variable ‘total_size’ set but not used [-Wunused-but-set-variable]
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src obj/gm_graph.o obj/gm_rand.o obj/graph_gen.o obj/graph_gen_main.o obj/gm_util.o obj/gm_lock.o obj/gm_file_handling.o obj/gm_file_c.o obj/gm_read_setup.o obj/gm_graph_binary_loader.o  -o ../bin/graph_gen
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_edge_list_graph_reader.cc -o obj/gm_edge_list_graph_reader.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_useropt.cc -o obj/gm_useropt.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_format_converter.cc -o obj/gm_format_converter.o
+In file included from inc/gm_property_of_collection.h:6:0,
+                 from inc/gm_mem_helper.h:8,
+                 from inc/gm_runtime.h:9,
+                 from inc/gm.h:14,
+                 from src/gm_format_converter.cc:1:
+inc/gm_set.h: In constructor ‘gm_node_set::gm_node_set(size_t, gm_graph&)’:
+inc/gm_set.h:391:15: warning: ‘gm_node_set::G’ will be initialized after [-Wreorder]
+inc/gm_set.h:388:20: warning:   ‘unsigned char* gm_node_set::byte_map’ [-Wreorder]
+inc/gm_set.h:26:5: warning:   when initialized here [-Wreorder]
+In file included from inc/gm.h:26:0,
+                 from src/gm_format_converter.cc:1:
+inc/gm_seq.h: In constructor ‘Seq_Iterator::Seq_Iterator(node_t*, int, int)’:
+inc/gm_seq.h:19:13: warning: ‘Seq_Iterator::Q’ will be initialized after [-Wreorder]
+inc/gm_seq.h:17:9: warning:   ‘int Seq_Iterator::iter’ [-Wreorder]
+inc/gm_seq.h:22:5: warning:   when initialized here [-Wreorder]
+inc/gm_seq.h: In constructor ‘Rev_Iterator::Rev_Iterator(node_t*, int, int)’:
+inc/gm_seq.h:42:13: warning: ‘Rev_Iterator::Q’ will be initialized after [-Wreorder]
+inc/gm_seq.h:40:9: warning:   ‘int Rev_Iterator::iter’ [-Wreorder]
+inc/gm_seq.h:45:5: warning:   when initialized here [-Wreorder]
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_bitmap.cc -o obj/gm_bitmap.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_runtime.cc -o obj/gm_runtime.o
+In file included from inc/gm_property_of_collection.h:6:0,
+                 from inc/gm_mem_helper.h:8,
+                 from inc/gm_runtime.h:9,
+                 from src/gm_runtime.cc:1:
+inc/gm_set.h: In constructor ‘gm_node_set::gm_node_set(size_t, gm_graph&)’:
+inc/gm_set.h:391:15: warning: ‘gm_node_set::G’ will be initialized after [-Wreorder]
+inc/gm_set.h:388:20: warning:   ‘unsigned char* gm_node_set::byte_map’ [-Wreorder]
+inc/gm_set.h:26:5: warning:   when initialized here [-Wreorder]
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_graph_avro_loader.cc -o obj/gm_graph_avro_loader.o
+src/gm_graph_avro_loader.cc: In function ‘bool parse_avro_header(avro_file_reader_t, std::vector<VALUE_TYPE>&, std::vector<VALUE_TYPE>&, std::vector<std::basic_string<char> >&, std::vector<std::basic_string<char> >&)’:
+src/gm_graph_avro_loader.cc:172:9: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘size_t {aka long unsigned int}’ [-Wformat]
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_default_usermain.cc -o obj/gm_default_usermain.o
+In file included from inc/gm_property_of_collection.h:6:0,
+                 from inc/gm_mem_helper.h:8,
+                 from inc/gm_runtime.h:9,
+                 from inc/gm.h:14,
+                 from src/gm_default_usermain.cc:3:
+inc/gm_set.h: In constructor ‘gm_node_set::gm_node_set(size_t, gm_graph&)’:
+inc/gm_set.h:391:15: warning: ‘gm_node_set::G’ will be initialized after [-Wreorder]
+inc/gm_set.h:388:20: warning:   ‘unsigned char* gm_node_set::byte_map’ [-Wreorder]
+inc/gm_set.h:26:5: warning:   when initialized here [-Wreorder]
+In file included from inc/gm.h:26:0,
+                 from src/gm_default_usermain.cc:3:
+inc/gm_seq.h: In constructor ‘Seq_Iterator::Seq_Iterator(node_t*, int, int)’:
+inc/gm_seq.h:19:13: warning: ‘Seq_Iterator::Q’ will be initialized after [-Wreorder]
+inc/gm_seq.h:17:9: warning:   ‘int Seq_Iterator::iter’ [-Wreorder]
+inc/gm_seq.h:22:5: warning:   when initialized here [-Wreorder]
+inc/gm_seq.h: In constructor ‘Rev_Iterator::Rev_Iterator(node_t*, int, int)’:
+inc/gm_seq.h:42:13: warning: ‘Rev_Iterator::Q’ will be initialized after [-Wreorder]
+inc/gm_seq.h:40:9: warning:   ‘int Rev_Iterator::iter’ [-Wreorder]
+inc/gm_seq.h:45:5: warning:   when initialized here [-Wreorder]
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_graph_adj_loader.cc -o obj/gm_graph_adj_loader.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_common_neighbor_iter.cc -o obj/gm_common_neighbor_iter.o
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src -c src/gm_mem_helper.cc -o obj/gm_mem_helper.o
+In file included from inc/gm_property_of_collection.h:6:0,
+                 from inc/gm_mem_helper.h:8,
+                 from src/gm_mem_helper.cc:2:
+inc/gm_set.h: In constructor ‘gm_node_set::gm_node_set(size_t, gm_graph&)’:
+inc/gm_set.h:391:15: warning: ‘gm_node_set::G’ will be initialized after [-Wreorder]
+inc/gm_set.h:388:20: warning:   ‘unsigned char* gm_node_set::byte_map’ [-Wreorder]
+inc/gm_set.h:26:5: warning:   when initialized here [-Wreorder]
+ar r lib/libgmgraph.a  obj/gm_edge_list_graph_reader.o obj/gm_lock.o obj/gm_file_handling.o obj/gm_useropt.o obj/gm_format_converter.o obj/gm_graph.o obj/gm_bitmap.o obj/graph_gen.o obj/gm_rand.o obj/gm_graph_binary_loader.o obj/gm_runtime.o obj/gm_graph_avro_loader.o obj/gm_file_c.o obj/gm_read_setup.o obj/gm_default_usermain.o obj/gm_graph_adj_loader.o obj/gm_util.o obj/gm_common_neighbor_iter.o obj/gm_mem_helper.o avro-c-1.7.2/src/schema_equal_avro.o avro-c-1.7.2/src/datum_value_avro.o avro-c-1.7.2/src/value-write_avro.o avro-c-1.7.2/src/resolved-reader_avro.o avro-c-1.7.2/src/datum_avro.o avro-c-1.7.2/src/value_avro.o avro-c-1.7.2/src/io_avro.o avro-c-1.7.2/src/consumer_avro.o avro-c-1.7.2/src/consume-binary_avro.o avro-c-1.7.2/src/string_avro.o avro-c-1.7.2/src/generic_avro.o avro-c-1.7.2/src/schema_avro.o avro-c-1.7.2/src/datum_write_avro.o avro-c-1.7.2/src/resolved-writer_avro.o avro-c-1.7.2/src/value-sizeof_avro.o avro-c-1.7.2/src/datafile_avro.o avro-c-1.7.2/src/datum_validate_avro.o avro-c-1.7.2/src/value-hash_avro.o avro-c-1.7.2/src/wrapped-buffer_avro.o avro-c-1.7.2/src/allocation_avro.o avro-c-1.7.2/src/errors_avro.o avro-c-1.7.2/src/value-json_avro.o avro-c-1.7.2/src/value-read_avro.o avro-c-1.7.2/src/datum_read_avro.o avro-c-1.7.2/src/dump_avro.o avro-c-1.7.2/src/codec_avro.o avro-c-1.7.2/src/array_avro.o avro-c-1.7.2/src/map_avro.o avro-c-1.7.2/src/resolver_avro.o avro-c-1.7.2/src/datum_skip_avro.o avro-c-1.7.2/src/encoding_binary_avro.o avro-c-1.7.2/src/memoize_avro.o avro-c-1.7.2/src/st_avro.o avro-c-1.7.2/src/../jansson/src/pack_unpack_json.o avro-c-1.7.2/src/../jansson/src/strbuffer_json.o avro-c-1.7.2/src/../jansson/src/error_json.o avro-c-1.7.2/src/../jansson/src/value_json.o avro-c-1.7.2/src/../jansson/src/load_json.o avro-c-1.7.2/src/../jansson/src/dump_json.o avro-c-1.7.2/src/../jansson/src/memory_json.o avro-c-1.7.2/src/../jansson/src/utf_json.o avro-c-1.7.2/src/../jansson/src/hashtable_json.o  
+ar: creating lib/libgmgraph.a
+mpic++ -O0 -g -Iinc -fopenmp -Wall  -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO -I./avro-c-1.7.2/src obj/gm_format_converter.o   -Llib -lgmgraph -o ../bin/gm_format_converter 
+make[3]: Leaving directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/gm_graph'
+make[2]: Leaving directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi'
+make[2]: Entering directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/src'
+../../bin/gm_comp -o=../output_mpi/generated -t=cpp_mpi  sssp.gm
+lib this = 0x2b28b90
+before calling generate_mpi_get_block: file_ptr is 952
+before calling generate_mpi_get_block: file_ptr is 1112
+before calling generate_mpi_get_block: file_ptr is 1186
+before calling generate_mpi_get_block: file_ptr is 1224
+before calling generate_mpi_get_block: file_ptr is 1268
+before calling generate_mpi_get_block: file_ptr is 1389
+before calling generate_mpi_get_block: file_ptr is 1412
+before calling generate_mpi_get_block: file_ptr is 1884
+inside generate_mpi_get_block before for loop fp is 1988 fp1 = 1911
+int G_len_tmp1;
+
+inside generate_mpi_get_block  fp is 1988 fp1 = 1911
+in insert_at ptr= 1911
+in insert_at file_ptr= 1988
+in insert_at ptr= 1955
+in insert_at file_ptr= 2032
+in insert_at ptr= 1992
+in insert_at file_ptr= 2069
+in insert_at ptr= 2030
+in insert_at file_ptr= 2107
+in insert_at ptr= 2083
+in insert_at file_ptr= 2160
+in insert_at ptr= 2142
+in insert_at file_ptr= 2219
+inside generate_mpi_get_block before for loop fp is 2407 fp1 = 2312
+int G_dist_nxt_tmp2;
+
+inside generate_mpi_get_block  fp is 2407 fp1 = 2312
+in insert_at ptr= 2312
+in insert_at file_ptr= 2407
+in insert_at ptr= 2361
+in insert_at file_ptr= 2456
+in insert_at ptr= 2398
+in insert_at file_ptr= 2493
+in insert_at ptr= 2436
+in insert_at file_ptr= 2531
+in insert_at ptr= 2489
+in insert_at file_ptr= 2584
+in insert_at ptr= 2548
+in insert_at file_ptr= 2643
+inside generate_mpi_get_block before for loop fp is 2933 fp1 = 2863
+int G_dist_nxt_tmp3;
+
+inside generate_mpi_get_block  fp is 2933 fp1 = 2863
+in insert_at ptr= 2863
+in insert_at file_ptr= 2933
+in insert_at ptr= 2916
+in insert_at file_ptr= 2986
+in insert_at ptr= 2957
+in insert_at file_ptr= 3027
+in insert_at ptr= 2999
+in insert_at file_ptr= 3069
+in insert_at ptr= 3056
+in insert_at file_ptr= 3126
+in insert_at ptr= 3119
+in insert_at file_ptr= 3189
+in insert_at ptr= 3217
+in insert_at file_ptr= 3287
+before calling generate_mpi_get_block: file_ptr is 4602
+before calling generate_mpi_get_block: file_ptr is 4770
+before calling generate_mpi_get_block: file_ptr is 4822
+before calling generate_mpi_get_block: file_ptr is 4866
+before calling generate_mpi_get_block: file_ptr is 4921
+inside generate_mpi_get_block before for loop fp is 5013 fp1 = 4976
+before calling generate_mpi_get_block: file_ptr is 5046
+make[2]: Leaving directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/src'
+make[2]: Entering directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi'
+make[3]: Entering directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/gm_graph/avro-c-1.7.2'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/gm_graph/avro-c-1.7.2'
+make[3]: Entering directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/gm_graph'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/gm_graph'
+make[3]: Entering directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/src'
+mpic++ -O0 -g -I../generated -I../gm_graph/inc -I. -fopenmp -DDEFAULT_GM_TOP="\"/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl\"" -std=gnu++0x -DAVRO ../generated/sssp.cc sssp_main.cc ../gm_graph/lib/libgmgraph.a -L../gm_graph/lib -lgmgraph -o ../bin/sssp
+make[3]: Leaving directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi/src'
+make[2]: Leaving directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps/output_mpi'
+make[1]: Leaving directory '/home/anchu/research/greenmarl-to-mpi/Green-Marl-MPI/Green-Marl/apps'

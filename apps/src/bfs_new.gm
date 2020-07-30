@@ -1,0 +1,9 @@
+
+Procedure bfs(G: Graph, s: Node) 
+{
+
+    // BFS order iteration from s
+    InBFS(v: G.Nodes From s) {
+    }
+}
+

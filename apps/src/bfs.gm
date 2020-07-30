@@ -1,0 +1,31 @@
+
+Procedure bfs(G:Graph, dist:N_P<Int>, root: Node)
+{
+    N_P<Bool> updated;
+    N_P<Bool> updated_nxt;
+    N_P<Int>  dist_nxt;
+    Int lev = 0;
+    Bool fin = False;
+
+    G.dist = (G == root) ? 0 : +INF;
+    G.updated = (G == root) ? True: False;
+    G.dist_nxt = G.dist;
+    G.updated_nxt = G.updated;
+
+    While(!fin) {
+        fin = True;
+
+        Foreach(n: G.Nodes)(n.dist == lev) {
+            Foreach(s: n.Nbrs) {
+                // updated_nxt becomes true only if dist_nxt is actually updated
+                <s.dist_nxt; s.updated_nxt> min= <n.dist + 1; True>; 
+            }
+        }
+
+        G.dist = G.dist_nxt;
+        G.updated = G.updated_nxt;
+        G.updated_nxt = False;
+        fin = ! Exist(n: G.Nodes){n.updated};
+        lev = lev + 1; 
+    }
+}

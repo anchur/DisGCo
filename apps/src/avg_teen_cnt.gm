@@ -1,0 +1,22 @@
+// The example used in GPS paper
+Procedure avg_teen_cnt(
+        G: Graph, 
+        age, teen_cnt: N_P<Int>,
+        K: Int) : Float
+{
+    G.teen_cnt = 0;
+    //Foreach(n: G.Nodes) {
+    //  Foreach(t:n.InNbrs)(t.age>=10 && t.age<20){
+    //    n.teen_cnt++;
+    //  }
+    //}
+
+    Foreach(n: G.Nodes)(n.age>=10 && n.age<20) {
+      Foreach(t:n.Nbrs){
+        t.teen_cnt++;
+      }
+    }
+
+    Float avg = (Float) Avg(n: G.Nodes)(n.age>K){n.teen_cnt};
+    Return avg;
+}

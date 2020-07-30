@@ -1,0 +1,23 @@
+1 bsp_canonical = false
+2 check for remote reads inside the body of Foreach
+  - if yes set is_bsp_canonical false
+3 Generate code for Foreach depending on value of is_bsp_canonical
+4 Emit the headers.
+
+
+
+* Structure of for header:
+  - A parallel loop iterating over nodes of the graph
+  - A nested loop iterating over neighbors of the node.
+  - if both the conditons are true, set bsp_canonical true.
+* If gets inside read_rhs_field , set the flag, bsp_canonical false.
+  -in read_rhs_field, update only if it is a remote read
+* If it is inside reduction, set bsp_canonical separately
+
+2nd Step
+=========
+- insert the name of properties to update in a buffer
+- note if the target is a constant/not
+  - if constant save it to a vector
+  - Either move the classes and function declarations to header. 
+- 
