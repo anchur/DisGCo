@@ -219,7 +219,6 @@ void gm_cpplib::generate_down_initializer(ast_foreach* f, gm_code_writer& Body) 
                     gm_is_up_nbr_node_iteration(iter_type) ? '-' : '+');
             Body.pushln(str_buf);
         } else {
-            Body.push("/*is reaching here */");
             if(MPI_GEN.is_present_in_local_access_nodes(alias_name)||MPI_GEN.is_present_in_local_access_edges(alias_name)) {
             sprintf(str_buf, "%s %s = %s.%s [%s];", type_name, var_name, graph_name, array_name, alias_name);
             } else {
@@ -341,11 +340,6 @@ void gm_cpplib::generate_foreach_header(ast_foreach* fe, gm_code_writer& Body) {
               MPI_GEN.reset_bsp_nested_2();
               MPI_GEN.reset_bsp_canonical();
             }
-          }
-          if(MPI_GEN.is_bsp_canonical()){
-            Body.pushln("/*flag set at this place*/");
-          } else {
-            Body.pushln("/*flag not set at this place*/");
           }
 #endif
           sprintf(str_buf, "for (%s %s = %s.%s[%s];", EDGE_T, alias_name, graph_name, array_name, src_name);

@@ -160,6 +160,9 @@ void gm_cpp_gen::do_generate_begin() {
 }
 
 #ifdef __USE_BSP_OPT__
+//function generates code for initialization function
+//for BSP Optimizations. Vertex property pushes are only handled in
+//implementation now. 
 void gm_cpp_gen::generate_opt_inits() {
   //ast_field *f = MPI_GEN.updated_props[0];
 
@@ -243,63 +246,70 @@ void gm_cpp_gen::generate_opt_inits() {
   char *write_buf = new char[4096]; 
   write_buf[0] = '\0';
   strcat( write_buf, "int _my_rank, _block_size, _num_process, num_nodes, max_neighbors;\n");
-   strcat( write_buf, "class proc_update_details {\n");
-    strcat( write_buf, " public:\n"); 
-     
-    //TODO: Now handled only for one push; however a single reduction
-    //could result in multiple pushes
-      strcat( write_buf, prop_types[0]);
-      strcat( write_buf, " * prop;\n");
-     strcat( write_buf, "int32_t* v_to_be_updated;\n");
-     strcat( write_buf, "int prop_max_size;\n");
+  strcat( write_buf, "class proc_update_details {\n");
+  strcat( write_buf, " public:\n"); 
 
-     strcat( write_buf, "int index_of_v;\n");
+  //TODO: Now handled only for vertices and one push; however a single reduction
+  //could result in multiple pushes like in case of min.
+  strcat( write_buf, prop_types[0]);
+  strcat( write_buf, " * ");
+  strcat( write_buf, prop_names[0]);
+  strcat( write_buf, ";\n");
+  strcat( write_buf, "int32_t* v_to_be_updated;\n");
+  strcat( write_buf, "int prop_max_size;\n");
 
-      strcat( write_buf, "proc_update_details() {\n");
+  strcat( write_buf, "int index_of_v;\n");
 
-     strcat( write_buf, "   prop = new ");
-      strcat( write_buf, prop_types[0]);
-     strcat(write_buf, "[max_neighbors];\n");
+  strcat( write_buf, "proc_update_details() {\n");
 
-     strcat( write_buf, "   v_to_be_updated = new int32_t[max_neighbors];\n");
+  strcat( write_buf, "   ");
+  strcat( write_buf, prop_names[0]);
+  strcat( write_buf," = new ");
+  strcat( write_buf, prop_types[0]);
+  strcat(write_buf, "[max_neighbors];\n");
 
- strcat( write_buf, "       prop_max_size = max_neighbors;\n");
-       strcat( write_buf, " index_of_v = 0;\n");
- strcat( write_buf, "     }\n");
+  strcat( write_buf, "   v_to_be_updated = new int32_t[max_neighbors];\n");
 
- strcat( write_buf, "void set_prop(int32_t v, ");
+  strcat( write_buf, "       prop_max_size = max_neighbors;\n");
+  strcat( write_buf, " index_of_v = 0;\n");
+  strcat( write_buf, "     }\n");
+
+  strcat( write_buf, "void set_prop(int32_t v, ");
   strcat (write_buf, prop_types[0]);
   strcat(write_buf, " d) {\n");
- strcat( write_buf, "prop[index_of_v] = d;\n");
- strcat( write_buf, "v_to_be_updated[index_of_v] = v;\n");
- strcat( write_buf, "index_of_v++;\n");	
- strcat( write_buf, "}\n");
+  strcat( write_buf, prop_names[0]);
+  strcat(write_buf, "[index_of_v] = d;\n");
+  strcat( write_buf, "v_to_be_updated[index_of_v] = v;\n");
+  strcat( write_buf, "index_of_v++;\n");	
+  strcat( write_buf, "}\n");
 
- strcat( write_buf, "void reset() {\n");
- strcat( write_buf, "  index_of_v = 0;\n");
- strcat( write_buf, "}\n");
+  strcat( write_buf, "void reset() {\n");
+  strcat( write_buf, "  index_of_v = 0;\n");
+  strcat( write_buf, "}\n");
 
- strcat( write_buf, "};\n");
+  strcat( write_buf, "};\n");
 
- strcat( write_buf, " MPI_Win *_meta_propwin;\n");
- strcat( write_buf, " MPI_Win *_meta_v_win;\n");
- strcat( write_buf, " MPI_Win *_meta_num_v_win;\n");
- strcat( write_buf, " proc_update_details *prop_buffer;\n");
+  strcat( write_buf, " MPI_Win *_meta_propwin;\n");
+  strcat( write_buf, " MPI_Win *_meta_v_win;\n");
+  strcat( write_buf, " MPI_Win *_meta_num_v_win;\n");
+  strcat( write_buf, " proc_update_details *prop_buffer;\n");
 
 
   strcat( write_buf, "void win_attach_meta_props() {\n");
-   strcat( write_buf, "int i;\n");
+  strcat( write_buf, "int i;\n");
 
-    strcat( write_buf, "for(i=0; i<_num_process; i++) {\n");
-      //attaches property
-     strcat( write_buf, "  create_win_");
-     strcat( write_buf, prop_types[0]);
-     strcat(write_buf,"(prop_buffer[i].prop, prop_buffer[i].prop_max_size, _meta_propwin[i]);\n");
-      //attaches v_to_be_updated
-      strcat( write_buf, " create_win_int(prop_buffer[i].v_to_be_updated, prop_buffer[i].prop_max_size, _meta_v_win[i]);\n");
-      // attaches index_of_v
-      strcat( write_buf, " create_win_int(&prop_buffer[i].index_of_v, 1, _meta_num_v_win[i]);\n");
-    strcat( write_buf, " }\n");
+  strcat( write_buf, "for(i=0; i<_num_process; i++) {\n");
+  //attaches property
+  strcat( write_buf, "  create_win_");
+  strcat( write_buf, prop_types[0]);
+  strcat(write_buf,"(prop_buffer[i].");
+  strcat(write_buf, prop_names[0]);
+  strcat( write_buf, ", prop_buffer[i].prop_max_size, _meta_propwin[i]);\n");
+  //attaches v_to_be_updated
+  strcat( write_buf, " create_win_int(prop_buffer[i].v_to_be_updated, prop_buffer[i].prop_max_size, _meta_v_win[i]);\n");
+  // attaches index_of_v
+  strcat( write_buf, " create_win_int(&prop_buffer[i].index_of_v, 1, _meta_num_v_win[i]);\n");
+  strcat( write_buf, " }\n");
 
 
   strcat( write_buf, " }\n");
@@ -307,20 +317,20 @@ void gm_cpp_gen::generate_opt_inits() {
 
   strcat( write_buf, "void initialize(gm_graph &G) {\n");
   strcat( write_buf, "_my_rank = G.get_rank();\n");
- strcat( write_buf, "_num_process = G.get_num_processes();\n");
-    strcat( write_buf, "_block_size = G.get_block_size();\n");
-   strcat( write_buf, " num_nodes = G.num_nodes();\n");
+  strcat( write_buf, "_num_process = G.get_num_processes();\n");
+  strcat( write_buf, "_block_size = G.get_block_size();\n");
+  strcat( write_buf, " num_nodes = G.num_nodes();\n");
 
-   strcat( write_buf, " _meta_propwin = new MPI_Win[_num_process];\n");
-   strcat( write_buf, " _meta_v_win = new MPI_Win[_num_process]; \n");
-   strcat( write_buf, " _meta_num_v_win = new MPI_Win[_num_process];\n");
+  strcat( write_buf, " _meta_propwin = new MPI_Win[_num_process];\n");
+  strcat( write_buf, " _meta_v_win = new MPI_Win[_num_process]; \n");
+  strcat( write_buf, " _meta_num_v_win = new MPI_Win[_num_process];\n");
 
 
-   strcat( write_buf, " int start_node = 0;\n");
-    strcat( write_buf, "int next_to_end_node = _block_size;\n");
-   strcat( write_buf, " if (_my_rank == _num_process - 1 ) {\n");
-    strcat( write_buf, "  next_to_end_node =  num_nodes-(_my_rank * _block_size);\n");
-   strcat( write_buf, " }\n");
+  strcat( write_buf, " int start_node = 0;\n");
+  strcat( write_buf, "int next_to_end_node = _block_size;\n");
+  strcat( write_buf, " if (_my_rank == _num_process - 1 ) {\n");
+  strcat( write_buf, "  next_to_end_node =  num_nodes-(_my_rank * _block_size);\n");
+  strcat( write_buf, " }\n");
 
 
   strcat( write_buf, "  max_neighbors = G.local_begin[next_to_end_node] - G.local_begin[start_node];\n");
@@ -384,11 +394,6 @@ void gm_cpp_gen::generate_proc_decl(ast_procdef* proc, bool is_body_file) {
 
 	if(!is_body_file)
 	{
-
-
-
-
-
 
 		Out.pushln("#define MASTER 0");
 
@@ -1170,12 +1175,12 @@ void gm_cpp_gen::generate_rhs_field(ast_field* f) {
 			non_local_access = true;
 #ifdef __USE_BSP_OPT__
       //TODO: The condtions coded for setting inside bsp is not complete
-  if(!MPI_GEN.is_inside_red()){
-    MPI_GEN.reset_bsp_canonical();
-    MPI_GEN.reset_bsp_nested_1();
-    MPI_GEN.reset_bsp_nested_2();
-    Body.push("/*reset inside rhs field*/");
-  }
+      if(!MPI_GEN.is_inside_red()){
+        MPI_GEN.reset_bsp_canonical();
+        MPI_GEN.reset_bsp_nested_1();
+        MPI_GEN.reset_bsp_nested_2();
+        Body.push("/*reset inside rhs field*/");
+      }
 #endif
 		}
 
@@ -1242,12 +1247,6 @@ void gm_cpp_gen::generate_rhs_field(ast_field* f) {
 		Body.push(f->get_second()->get_genname());
 		Body.push("_tmp");
 		Body.push(tmpcountstr);
-#ifdef __USE_BSP_OPT__
-    if(MPI_GEN.is_bsp_canonical())
-      Body.push("/* cp1: true */");
-    else
-      Body.push("/* cp1: false */");
-#endif
 	}
 	/*Body.push('[');
 	if (f->getTypeInfo()->is_node_property()) {
@@ -1365,6 +1364,7 @@ const char* gm_cpp_gen::get_type_string(ast_typedecl* t) {
 }
 
 extern bool gm_cpp_should_be_dynamic_scheduling(ast_foreach* f);
+
 #ifdef __USE_BSP_OPT__
 void gm_cpp_gen::emit_post_opt_body(GM_REDUCE_T r_type){
   if(MPI_GEN.is_bsp_canonical()) {
@@ -1422,6 +1422,7 @@ void gm_cpp_gen::emit_post_opt_body(GM_REDUCE_T r_type){
           Body.pushln("[v] > prop) {");
           Body.push(name);
           Body.pushln(" [v] = prop;");
+          // TODO: this step needs to be generalized
           Body.pushln(" G_updated_nxt[v] = true;");
           Body.pushln(" }");
         }
@@ -1531,16 +1532,6 @@ void gm_cpp_gen::generate_sent_foreach(ast_foreach* f) {
     MPI_GEN.dec_nesting_level();
   }
 #endif
-#ifdef __USE_BSP_OPT__
-  Body.push("/*BSP : ");
-  if(MPI_GEN.is_bsp_canonical()){
-    Body.push("true");
-  }else{
-    Body.push("false");
-  }
-  Body.push("*/");
-#endif
-
 }
 
 void gm_cpp_gen::generate_sent_call(ast_call* c) {
@@ -1820,8 +1811,6 @@ void gm_cpp_gen::generate_sent_assign(ast_assign* a) {
     }
 #endif
 
-    if(strcmp((a->get_lhs_scala())->get_genname(), "dist") == 0)
-      printf("found dist\n");
 	} else if (a->is_target_map_entry()) {
 		generate_sent_map_assign(a->to_assign_mapentry());
 		return;
@@ -2223,11 +2212,25 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #ifndef __USE_BSP_OPT__
           generate_rhs_field(a->get_lhs_field()); Body.push("+"); 
         #endif
+        #ifdef __USE_BSP_OPT__
+        if(!MPI_GEN.is_in_bsp_prepass()){
+          if(MPI_GEN.is_bsp_canonical()){
+            generate_rhs_field(a->get_lhs_field()); Body.push("+"); 
+          }
+        }
+        #endif
           generate_expr(a->get_rhs()); Body.push(";");
           break;    
         case GMREDUCE_MULT:
         #ifndef __USE_BSP_OPT__
            generate_rhs_field(a->get_lhs_field()); Body.push("*"); 
+        #endif
+        #ifdef __USE_BSP_OPT__
+        if(!MPI_GEN.is_in_bsp_prepass()){
+          if(MPI_GEN.is_bsp_canonical()){
+            generate_rhs_field(a->get_lhs_field()); Body.push("*"); 
+          }
+        }
         #endif
            generate_expr(a->get_rhs()); Body.push(";");
           break;    
@@ -2235,11 +2238,25 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #ifndef __USE_BSP_OPT__
           generate_rhs_field(a->get_lhs_field());  Body.push("&"); 
         #endif
+        #ifdef __USE_BSP_OPT__
+        if(!MPI_GEN.is_in_bsp_prepass()){
+          if(MPI_GEN.is_bsp_canonical()){
+            generate_rhs_field(a->get_lhs_field()); Body.push("&"); 
+          }
+        }
+        #endif
           Body.push("(");generate_expr(a->get_rhs()); Body.push(");");
           break;    
         case GMREDUCE_OR:
         #ifndef __USE_BSP_OPT__
            generate_rhs_field(a->get_lhs_field()); Body.push("|"); 
+        #endif
+        #ifdef __USE_BSP_OPT__
+        if(!MPI_GEN.is_in_bsp_prepass()){
+          if(MPI_GEN.is_bsp_canonical()){
+            generate_rhs_field(a->get_lhs_field()); Body.push("|"); 
+          }
+        }
         #endif
            Body.push("(");generate_expr(a->get_rhs()); Body.push(");");
           break;    
@@ -2247,18 +2264,46 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #ifndef __USE_BSP_OPT__
           Body.push("std::min("); generate_rhs_field(a->get_lhs_field()); Body.push(",");
         #endif
+        #ifdef __USE_BSP_OPT__
+        if(!MPI_GEN.is_in_bsp_prepass()){
+          if(MPI_GEN.is_bsp_canonical()){
+            Body.push("std::min("); generate_rhs_field(a->get_lhs_field()); Body.push(",");
+          }
+        }
+        #endif
           generate_expr(a->get_rhs()); 
         #ifndef __USE_BSP_OPT__
           Body.push(");");
+        #endif
+        #ifdef __USE_BSP_OPT__
+        if(!MPI_GEN.is_in_bsp_prepass()){
+          if(MPI_GEN.is_bsp_canonical()){
+            Body.push(");");
+          }
+        }
         #endif
           break;    
         case GMREDUCE_MAX:
         #ifndef __USE_BSP_OPT__
           Body.push("std::max("); generate_rhs_field(a->get_lhs_field()); Body.push(",");
         #endif
+        #ifdef __USE_BSP_OPT__
+        if(!MPI_GEN.is_in_bsp_prepass()){
+          if(MPI_GEN.is_bsp_canonical()){
+            Body.push("std::max("); generate_rhs_field(a->get_lhs_field()); Body.push(",");
+          }
+        }
+        #endif
           generate_expr(a->get_rhs()); 
         #ifndef __USE_BSP_OPT__
           Body.push(");");
+        #endif
+        #ifdef __USE_BSP_OPT__
+        if(!MPI_GEN.is_in_bsp_prepass()){
+          if(MPI_GEN.is_bsp_canonical()){
+            Body.push(");");
+          }
+        }
         #endif
           break;    
         default:
@@ -2294,7 +2339,6 @@ void gm_cpp_gen::generate_opt_body(ast_assign *a, const char * rhs_temp) {
 			const char * ind = get_lib()->node_index(f->get_first());
      
       MPI_GEN.updated_props.push_back(f); 
-      Body.push("/*inserted*/");
       Body.push("int ");
       Body.push(ind);
       Body.push("_rank = G.get_rank_node(");
@@ -2767,7 +2811,6 @@ void gm_cpp_gen::prepare_parallel_for(bool need_dynamic) {
 	//  Body.push(" schedule(dynamic,128)");
 
 	//}
-	Body.push("//mpi for");
 
 	Body.NL();
 }
