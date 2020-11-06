@@ -673,6 +673,28 @@ void gm_cpp_gen::generate_proc_decl(ast_procdef* proc, bool is_body_file) {
 		Out.NL();
 		Out.NL();
 
+
+		Out.push("#define get_node_property_float(_result, _ba_index, _rank, _prop_index)\\");
+		Out.NL();
+		Out.push("{\\");
+		Out.NL();
+		Out.push("MPI_Get(&_result, 1, MPI_FLOAT, _rank, base_address[G.get_num_processes()*_ba_index+_rank]+_prop_index*sizeof(float), 1, MPI_FLOAT, win);\\");
+		Out.NL();
+		Out.push("}");
+		Out.NL();
+		Out.NL();
+
+
+		Out.push("#define put_node_property_float(_result, _ba_index, _rank, _prop_index)\\");
+		Out.NL();
+		Out.push("{\\");
+		Out.NL();
+		Out.push("MPI_Put(&_result, 1, MPI_FLOAT, _rank, base_address[G.get_num_processes()*_ba_index+_rank]+_prop_index*sizeof(float), 1, MPI_FLOAT, win);\\");
+		Out.NL();
+		Out.push("}");
+		Out.NL();
+		Out.NL();
+
 		Out.push("#define lock_and_get_node_property_double(_result, _ba_index, _rank, _prop_index)\\");
 		Out.NL();
 		Out.push("{\\");
@@ -997,11 +1019,21 @@ void gm_cpp_gen::generate_rhs_id(ast_id* id) {
 			if(MPI_GEN.is_present_in_local_access_nodes(id->get_genname()))
 			{
         if(!MPI_GEN.is_assign_lhs_scalar()){
+#ifdef __USE_BSP_OPT__
+          //TODO: need to change it to handle all general 
+          //cases of min reduction 
+          if(MPI_GEN.gen_post_opt_body) {
+            Body.push("v");
+          }else{
+#endif
           Body.push("G.get_global_node_num( ");
           Body.push(id->get_genname());
           Body.push(")");
           MPI_GEN.reset_lhs_local_node();
           MPI_GEN.reset_lhs_local_edge();
+#ifdef __USE_BSP_OPT__
+          }
+#endif
         } else {
           Body.push(id->get_genname());
           MPI_GEN.set_lhs_local_node();
@@ -1367,6 +1399,7 @@ extern bool gm_cpp_should_be_dynamic_scheduling(ast_foreach* f);
 
 #ifdef __USE_BSP_OPT__
 void gm_cpp_gen::emit_post_opt_body(GM_REDUCE_T r_type){
+  MPI_GEN.gen_post_opt_body = true;
   if(MPI_GEN.is_bsp_canonical()) {
     //TODO: this should not be called here. If there  are multiple bsp canonical loops, it is not dealt.
     generate_opt_inits();
@@ -1417,13 +1450,40 @@ void gm_cpp_gen::emit_post_opt_body(GM_REDUCE_T r_type){
           Body.pushln(" [v] + prop;");
           break;
         default:
+          //default is for min reduction
           Body.push(" if(");
           Body.push(name);
           Body.pushln("[v] > prop) {");
           Body.push(name);
           Body.pushln(" [v] = prop;");
           // TODO: this step needs to be generalized
-          Body.pushln(" G_updated_nxt[v] = true;");
+
+
+	     char* names;
+          ast_node* n = MPI_GEN.L;
+          ast_id* id;
+          int type;
+          if (n->get_nodetype() == AST_ID) {
+            id = (ast_id*) n;
+            type = id->getTypeSummary();
+          } else {
+            assert(n->get_nodetype() == AST_FIELD);
+            ast_field* f = (ast_field*) n;
+            id = f->get_second();
+            type = id->getTargetTypeSummary();
+          }
+          names = (char*) FE.voca_temp_name_and_add(id->get_genname(), "_arg");
+          Body.push(get_type_string(type));
+          Body.SPC();
+          Body.push(names);
+          Body.push(" = ");
+          generate_expr(MPI_GEN.R);
+          Body.pushln(";");
+
+
+          Body.push(" G_updated_nxt[v] = ");
+          Body.push(names);
+          Body.pushln(";");
           Body.pushln(" }");
         }
       Body.pushln(" }");
@@ -1436,6 +1496,7 @@ void gm_cpp_gen::emit_post_opt_body(GM_REDUCE_T r_type){
 
 
   }
+  MPI_GEN.gen_post_opt_body = false;
 }
 #endif
 
@@ -2074,16 +2135,33 @@ void gm_cpp_gen::generate_sent_block_exit(ast_sentblock* sb) {
 }
 
 void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
-#ifdef __USE_BSP_OPT__
   MPI_GEN.set_inside_red();
-#endif
+  MPI_GEN.reset_red_lock_emitted();
   if (a->is_argminmax_assign()) {
     generate_sent_reduce_argmin_assign(a);
-#ifdef __USE_BSP_OPT__
-  MPI_GEN.reset_inside_red();
-#endif
+    MPI_GEN.reset_inside_red();
     return;
   }
+	
+  // LOCK, UNLOCK
+	const char* LOCK_FN_NAME;
+	const char* UNLOCK_FN_NAME;
+	if (a->is_target_scalar()) {
+		LOCK_FN_NAME = "";
+		UNLOCK_FN_NAME = "";
+	} else {
+		ast_id* drv = a->get_lhs_field()->get_first();
+		if (drv->getTypeInfo()->is_node_compatible()) {
+			LOCK_FN_NAME = "lock_win_for_node";
+			UNLOCK_FN_NAME = "unlock_win_for_node";
+		} else if (drv->getTypeInfo()->is_edge_compatible()) {
+			LOCK_FN_NAME = "lock_win_for_edge";
+			UNLOCK_FN_NAME = "unlock_win_for_edge";
+		} else {
+			assert(false);
+		}
+	}
+
 
   GM_REDUCE_T r_type = (GM_REDUCE_T) a->get_reduce_type();
 #ifdef __USE_BSP_OPT__
@@ -2106,11 +2184,8 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
     sprintf(templateParameter, "");
   }
 
-  //mpi
-  int current_indent = 0;
-  int f_ptr = _Body.get_write_ptr(current_indent);
-
-  MPI_GEN.mpi_get_details.clear();
+    int current_indent = 0;
+    int f_ptr = _Body.get_write_ptr(current_indent);
 
 #ifdef __USE_BSP_OPT__
   char *rhstemp = new char[100];
@@ -2118,6 +2193,41 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
 #endif
 
   if(!is_scalar){
+    
+
+    #ifndef __USE_BSP_OPT__
+    Body.push(LOCK_FN_NAME);
+    Body.push("(");
+    if (a->is_target_scalar()) {
+      Body.push("&");
+      generate_rhs_id(a->get_lhs_scala());
+    } else {
+      generate_rhs_id(a->get_lhs_field()->get_first());
+    }
+    Body.pushln(");");
+    MPI_GEN.set_red_lock_emitted();
+    #endif
+    #ifdef __USE_BSP_OPT__
+    if(!MPI_GEN.is_in_bsp_prepass()){
+      if(!MPI_GEN.is_bsp_canonical()){
+        Body.push(LOCK_FN_NAME);
+        Body.push("(");
+        if (a->is_target_scalar()) {
+          Body.push("&");
+          generate_rhs_id(a->get_lhs_scala());
+        } else {
+          generate_rhs_id(a->get_lhs_field()->get_first());
+        }
+        Body.pushln(");");
+      }
+    }
+    #endif
+    //mpi
+    current_indent = 0;
+    f_ptr = _Body.get_write_ptr(current_indent);
+
+    MPI_GEN.mpi_get_details.clear();
+
     ast_field *f = a->get_lhs_field();
     const char *tmp_type = NULL;
     const char *tmp_name = NULL;
@@ -2214,7 +2324,7 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #endif
         #ifdef __USE_BSP_OPT__
         if(!MPI_GEN.is_in_bsp_prepass()){
-          if(MPI_GEN.is_bsp_canonical()){
+          if(!MPI_GEN.is_bsp_canonical()){
             generate_rhs_field(a->get_lhs_field()); Body.push("+"); 
           }
         }
@@ -2227,7 +2337,7 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #endif
         #ifdef __USE_BSP_OPT__
         if(!MPI_GEN.is_in_bsp_prepass()){
-          if(MPI_GEN.is_bsp_canonical()){
+          if(!MPI_GEN.is_bsp_canonical()){
             generate_rhs_field(a->get_lhs_field()); Body.push("*"); 
           }
         }
@@ -2240,7 +2350,7 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #endif
         #ifdef __USE_BSP_OPT__
         if(!MPI_GEN.is_in_bsp_prepass()){
-          if(MPI_GEN.is_bsp_canonical()){
+          if(!MPI_GEN.is_bsp_canonical()){
             generate_rhs_field(a->get_lhs_field()); Body.push("&"); 
           }
         }
@@ -2253,7 +2363,7 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #endif
         #ifdef __USE_BSP_OPT__
         if(!MPI_GEN.is_in_bsp_prepass()){
-          if(MPI_GEN.is_bsp_canonical()){
+          if(!MPI_GEN.is_bsp_canonical()){
             generate_rhs_field(a->get_lhs_field()); Body.push("|"); 
           }
         }
@@ -2266,7 +2376,7 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #endif
         #ifdef __USE_BSP_OPT__
         if(!MPI_GEN.is_in_bsp_prepass()){
-          if(MPI_GEN.is_bsp_canonical()){
+          if(!MPI_GEN.is_bsp_canonical()){
             Body.push("std::min("); generate_rhs_field(a->get_lhs_field()); Body.push(",");
           }
         }
@@ -2277,7 +2387,7 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #endif
         #ifdef __USE_BSP_OPT__
         if(!MPI_GEN.is_in_bsp_prepass()){
-          if(MPI_GEN.is_bsp_canonical()){
+          if(!MPI_GEN.is_bsp_canonical()){
             Body.push(");");
           }
         }
@@ -2289,7 +2399,7 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #endif
         #ifdef __USE_BSP_OPT__
         if(!MPI_GEN.is_in_bsp_prepass()){
-          if(MPI_GEN.is_bsp_canonical()){
+          if(!MPI_GEN.is_bsp_canonical()){
             Body.push("std::max("); generate_rhs_field(a->get_lhs_field()); Body.push(",");
           }
         }
@@ -2300,7 +2410,7 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         #endif
         #ifdef __USE_BSP_OPT__
         if(!MPI_GEN.is_in_bsp_prepass()){
-          if(MPI_GEN.is_bsp_canonical()){
+          if(!MPI_GEN.is_bsp_canonical()){
             Body.push(");");
           }
         }
@@ -2309,6 +2419,8 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
         default:
           assert(false);
       }
+
+
     }
   }
   //mpi
@@ -2327,10 +2439,35 @@ void gm_cpp_gen::generate_sent_reduce_assign(ast_assign *a) {
       }
     }
 #endif
+   #ifndef __USE_BSP_OPT__
+	   Body.push(UNLOCK_FN_NAME);
+	   Body.push("(");
+	   if (a->is_target_scalar()) {
+	   	Body.push("&");
+	   	generate_rhs_id(a->get_lhs_scala());
+	   } else {
+	   	generate_rhs_id(a->get_lhs_field()->get_first());
+	   }
+	   Body.pushln(");");
+   #endif
+   #ifdef __USE_BSP_OPT__
+   if(!MPI_GEN.is_in_bsp_prepass()){
+     if(!MPI_GEN.is_bsp_canonical()){
+	     Body.push(UNLOCK_FN_NAME);
+	     Body.push("(");
+	     if (a->is_target_scalar()) {
+	     	Body.push("&");
+	     	generate_rhs_id(a->get_lhs_scala());
+	     } else {
+	     	generate_rhs_id(a->get_lhs_field()->get_first());
+	     }
+	     Body.pushln(");");
+     }
+   }
+   #endif
   }
-#ifdef __USE_BSP_OPT__
+  MPI_GEN.reset_red_lock_emitted();
   MPI_GEN.reset_inside_red();
-#endif
 }
 
 #ifdef __USE_BSP_OPT__
@@ -2445,6 +2582,19 @@ void gm_cpp_gen::generate_sent_reduce_argmin_assign(ast_assign *a) {
 
 
 	MPI_GEN.generate_mpi_get_block(fp, curr_indent, Body);
+	
+  
+  std::list<ast_node*> L = a->get_lhs_list();
+	std::list<ast_expr*> R = a->get_rhs_list();
+	std::list<ast_node*>::iterator I;
+	std::list<ast_expr*>::iterator J;
+	char** names = new char*[L.size()];
+	int i = 0;
+	J = R.begin();
+	for (I = L.begin(); I != L.end(); I++, J++, i++) {
+    MPI_GEN.L = *I;
+    MPI_GEN.R = *J;
+  }
 
   //all rhs values are copied to temporaries at this point.
 #ifdef __USE_BSP_OPT__
@@ -2491,14 +2641,10 @@ void gm_cpp_gen::generate_sent_reduce_argmin_assign(ast_assign *a) {
 	}
 
 
-
-
-	std::list<ast_node*> L = a->get_lhs_list();
-	std::list<ast_expr*> R = a->get_rhs_list();
-	std::list<ast_node*>::iterator I;
-	std::list<ast_expr*>::iterator J;
-	char** names = new char*[L.size()];
-	int i = 0;
+	L = a->get_lhs_list();
+	R = a->get_rhs_list();
+	names = new char*[L.size()];
+	i = 0;
 	J = R.begin();
 	for (I = L.begin(); I != L.end(); I++, J++, i++) {
 		ast_node* n = *I;
@@ -2596,7 +2742,6 @@ void gm_cpp_gen::generate_sent_reduce_argmin_assign(ast_assign *a) {
            MPI_GEN.reset_bsp_canonical();
            MPI_GEN.reset_bsp_nested_1();
            MPI_GEN.reset_bsp_nested_2(); 
-    Body.push("/*reset inside red*/");
       }
 
     }

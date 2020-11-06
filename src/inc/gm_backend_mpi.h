@@ -39,11 +39,14 @@ class gm_mpi_gen: public gm_cpp_gen {
 public:
 
 
+  bool inside_red;
+  bool red_lock_emitted;
+  ast_node* L;
+  ast_expr* R;
 #ifdef __USE_BSP_OPT__
   bool bsp_canonical;
   bool bsp_nested_1;
   bool bsp_nested_2;
-  bool inside_red;
   bool in_bsp_prepass;
   vector<ast_field *> updated_props;
   //to emit opt_body.
@@ -53,6 +56,7 @@ public:
   int st_blk_cur_int;
   int prop_temp_no;
   GM_REDUCE_T r_type;
+  bool gen_post_opt_body;
   vector<char *> prop_names;
   vector<char *> prop_types;
 #endif
@@ -109,8 +113,10 @@ public:
     bsp_nested_1 = false;
     bsp_nested_2 = false;
     inside_red = false;
+    red_lock_emitted = false;
     prop_temp_no = 0;
     r_type = GMREDUCE_MIN;
+    gen_post_opt_body = false;
 #endif
 #ifdef __USE_VAR_REUSE_OPT__
     nesting_level = 0;
@@ -166,17 +172,6 @@ public:
     bsp_nested_2 = false;
   }
 
-  bool is_inside_red(){
-    return inside_red;
-  }
-
-  void set_inside_red() {
-    inside_red = true;
-  }
-
-  void reset_inside_red() {
-    inside_red = false;
-  }
 
   bool is_in_bsp_prepass() {
     return in_bsp_prepass;
@@ -191,6 +186,30 @@ public:
   }
 #endif
 
+  bool is_inside_red(){
+    return inside_red;
+  }
+
+  void set_inside_red() {
+    inside_red = true;
+  }
+
+  void reset_inside_red() {
+    inside_red = false;
+  }
+
+  bool is_red_lock_emitted() {
+    return red_lock_emitted;
+  }
+
+  void set_red_lock_emitted() {
+    red_lock_emitted = true;
+  }
+
+  void reset_red_lock_emitted() {
+    red_lock_emitted = false;
+  }
+  
   bool is_lhs_local_node(){
     return lhs_local_node;
   }
@@ -631,7 +650,11 @@ public:
 
 
 	void generate_mpi_get_block(int fp1, int curr_indent1, gm_code_writer &Body){
-    generate_mpi_get(fp1, curr_indent1, Body, false, true);
+    if(is_red_lock_emitted()) {
+      generate_mpi_get(fp1, curr_indent1, Body, false, false);
+    }else {
+      generate_mpi_get(fp1, curr_indent1, Body, false, true);
+    }
 	}
 
 	void generate_mpi_put_block_without_lock(ast_field *f, gm_code_writer &Body)
@@ -1073,7 +1096,11 @@ public:
 
 	void generate_mpi_put_block(ast_field *f, gm_code_writer &Body)
 	{
-    generate_mpi_put(f, Body, true);
+    if(is_red_lock_emitted()) {
+      generate_mpi_put(f, Body, false);
+    }else {
+      generate_mpi_put(f, Body, true);
+    }
 	}
 
   void generate_mpi_put(ast_field *f, gm_code_writer &Body, bool need_lock)
